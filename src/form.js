@@ -30,6 +30,7 @@ class Form extends React.Component {
     this.getValue = this.getValue.bind(this)
     this.setNestedError = this.setNestedError.bind(this)
     this.getError = this.getError.bind(this)
+    this.getTouchedError = this.getTouchedError.bind(this)
     this.setTouched = this.setTouched.bind(this)
     this.getTouched = this.getTouched.bind(this)
     this.addValue = this.addValue.bind(this)
@@ -131,6 +132,12 @@ class Form extends React.Component {
     return _.get(this.state.errors, field)
   }
 
+  getTouchedError (field) {
+      if (this.getTouched(field)) {
+          return this.getError(field);
+      }
+  }
+
   setTouched (field, value = true) {
     const touched = _.set(this.state.touched, field, value)
     this.setFormState({ touched })
@@ -219,6 +226,7 @@ class Form extends React.Component {
       getValue: this.getValue,
       setNestedError: this.setNestedError,
       getError: this.getError,
+      getTouchedError: this.getTouchedError,
       setTouched: this.setTouched,
       getTouched: this.getTouched,
       addValue: this.addValue,
